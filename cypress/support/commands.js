@@ -51,6 +51,8 @@ Cypress.Commands.add('uinsurelogin',(email,password)=>{
     cy.get('body')
         .then((body) => {
             if(body.find('#login-email-address').length > 0){
+               // cy.intercept('POST','/.well-known/openid-configuration').as('xhrWaitLogin')
+              //  cy.wait('@xhrWaitLogin',{requestTimeOut: 15000})
                 cy.get('#login-email-address').type(email)
                 cy.get('#login-password').type(password)
                 cy.get('[data-testid=login-sign-in] > .MuiButton-label').click()
@@ -65,7 +67,25 @@ Cypress.Commands.add('uinsurelogin',(email,password)=>{
 
 
 Cypress.Commands.add('uinsurelogout',()=>{
-    cy.get('[data-testid=logout-button] > .MuiButton-label').click({force:true})
+    cy.get('body')
+        .then((body) => {
+            if(body.find('[data-testid="logout-button-small"]').length > 0){
+                cy.get('[data-testid="logout-button-small"]').should('be.visible').click()
+            }
+            
+            else if(body.find('[data-testid="logout-button').length === 0){
+                cy.get('[data-testid="logout-button"]').click()
+                }
+
+            
+
+        })
+    
+    
+ 
+   // class="MuiBox-root jss535 jss7 jss14 jss8"//opening
+   // data-testid="logout-button-small"// logout when collapsed
+
 })
 
 

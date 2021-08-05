@@ -32,6 +32,7 @@ describe('As a Broker I want to be able to search through my quotes so that I ca
         beforeEach(() => {
             //cy.intercept('POST','/api/v2/client/sites/1958578/visit-data?sv=7').as('xhrWait')
             cy.visit('https://quotes.test.uinsure.co.uk')  
+            cy.wait(10000)
             cy.uinsurelogin('john.doe@uinsure.co.uk', 'Password2')
             cy.url().should('contains', '/new-quote');
             cy.get('[data-testid=nav-drawer-item-recent-activity-label]', { timeout: 20000 }).click()
@@ -39,6 +40,10 @@ describe('As a Broker I want to be able to search through my quotes so that I ca
             cy.get('table.MuiTable-root', { timeout: 20000 }).should('be.visible')
           //  cy.iframe().eq(1).find('[data-testid=gotIt]').should('be.visible').click()
            cy.get('[data-testid=gotIt] > .MuiButton-label').click()
+        })
+
+        afterEach(()=>{
+            cy.uinsurelogout()
         })
 
         it('As a customer, i can search by a quote by a full or partial reference e.g., UINH0021475 or 1475.', () => {
@@ -147,7 +152,7 @@ describe('As a Broker I want to be able to search through my quotes so that I ca
                 })
         })
 
-        it.only('As a customer, i can search by a quote by using a Combination of first & lastName ', () => {
+        it('As a customer, i can search by a quote by using a Combination of first & lastName ', () => {
 
            
             cy.get('#policy-name').type(customerFullNames)
@@ -185,13 +190,13 @@ describe('As a Broker I want to be able to search through my quotes so that I ca
                   // }
               //  })
         })
-                    }
+                
             
-                })
+            
                 
             
 
-        it('As a customer, i can search by a quote by using  postcode.', () => {
+        it.only('As a customer, i can search by a quote by using  postcode.', () => {
             
             cy.get('#policy-postcode').type(customerPostCode)
             cy.get('[data-testid=filter-button]').click()
