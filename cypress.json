@@ -1,0 +1,30 @@
+{
+        "viewportWidth": 1960,
+        "viewportHeight": 1080,
+
+        "chromeWebSecurity":false,
+        "defaultCommandTimeout":10000,
+        "execTimeout":60000,
+        "pageLoadTimeout":60000,
+        "requestTimeout":60000,
+        "responseTimeout":60000,
+
+        "reporter": "mochawesome",
+        "reporterOptions": {
+          "reportDir": "cypress/results",
+          "reportFilename": "results",
+          "overwrite": true,
+          "html": true,
+          "json": true,
+          "charts": true
+        },
+        "video":false,
+
+        "env":{
+
+          "uinsureUrl":"https://quotes.test.uinsure.co.uk"
+        }
+        
+
+      
+}
